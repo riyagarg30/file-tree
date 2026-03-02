@@ -1,7 +1,7 @@
-# 📁 React File Tree Renderer
+# 📁 React File Tree Renderer (TypeScript)
 
-A simple and interactive File Tree component built with React.  
-This project renders a hierarchical file/folder structure similar to VS Code's explorer panel.
+A simple and interactive File Tree component built with **React + TypeScript**.  
+This project renders a hierarchical file/folder structure similar to VS Code's explorer panel using recursive components and strong typing.
 
 ---
 
@@ -10,7 +10,8 @@ This project renders a hierarchical file/folder structure similar to VS Code's e
 - 📂 Expand / Collapse folders
 - 📄 File and Folder icons
 - 🔁 Recursive rendering of nested structures
-- ⚛️ Built with React functional components & hooks
+- ⚛️ Built with React Functional Components & Hooks
+- 🧩 Fully typed with TypeScript
 - 🎨 Clean and minimal UI
 
 ---
@@ -18,7 +19,7 @@ This project renders a hierarchical file/folder structure similar to VS Code's e
 ## 🛠 Tech Stack
 
 - React
-- JavaScript (ES6+)
+- TypeScript
 - CSS
 
 ---
@@ -29,14 +30,17 @@ This project renders a hierarchical file/folder structure similar to VS Code's e
 src/
 │
 ├── components/
-│   ├── FileTree.js
-│   ├── TreeNode.js
+│   ├── FileTree.tsx
+│   ├── TreeNode.tsx
+│
+├── types/
+│   └── FileNode.ts
 │
 ├── data/
-│   └── fileData.js
+│   └── fileData.ts
 │
-├── App.js
-└── index.js
+├── App.tsx
+└── main.tsx
 ```
 
 ---
@@ -46,7 +50,7 @@ src/
 1. Clone the repository:
 
 ```
-git clone https://github.com/YOUR_USERNAME/react-file-tree.git
+git clone https://github.com/riyagarg30/react-file-tree.git
 ```
 
 2. Navigate to the project folder:
@@ -64,35 +68,50 @@ npm install
 4. Start the development server:
 
 ```
-npm start
+npm run dev
 ```
 
-The app will run on:
+The app will typically run on:
 
 ```
-http://localhost:3000
+http://localhost:5173
 ```
+
+(If created with Vite. If using Create React App, use `npm start` instead.)
 
 ---
 
 ## 🧠 How It Works
 
-The file tree is rendered recursively:
+The file tree is rendered recursively using a strongly typed data structure.
 
-- Each folder maintains its own `isOpen` state.
-- Clicking a folder toggles visibility of its children.
-- Files are rendered as leaf nodes.
+Each folder:
 
-Example data structure:
+- Maintains its own `isOpen` state
+- Toggles visibility of children on click
 
-```js
-const fileData = [
+Files are rendered as leaf nodes.
+
+### Example Type Definition
+
+```ts
+export interface FileNode {
+  name: string;
+  type: "file" | "folder";
+  children?: FileNode[];
+}
+```
+
+### Example Data Structure
+
+```ts
+const fileData: FileNode[] = [
   {
     name: "src",
     type: "folder",
     children: [
-      { name: "App.js", type: "file" },
-      { name: "index.js", type: "file" }
+      { name: "App.tsx", type: "file" },
+      { name: "main.tsx", type: "file" }
     ]
   }
 ];
@@ -106,13 +125,22 @@ const fileData = [
 - File selection highlight
 - Context menu (rename/delete)
 - Lazy loading large trees
-- TypeScript support
+- Unit testing with Jest + React Testing Library
 
 ---
 
 ## 📸 Preview
 
 _Add a screenshot here (optional)_
+
+---
+
+## 🌐 Live Demo (Optional)
+
+You can deploy easily using:
+- Vercel
+- Netlify
+- GitHub Pages
 
 ---
 
@@ -124,5 +152,5 @@ MIT License
 
 ## 👩‍💻 Author
 
-Your Name  
+Riya Garg  
 GitHub: https://github.com/riyagarg30
